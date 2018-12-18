@@ -1,0 +1,47 @@
+﻿@model IdentityWithExistingDatabase.Models.DAL.Entities.User
+@{
+    ViewBag.Title = $"Details of User {Model.Name}";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h1>Details: @Model.Name</h1>
+        <br>
+        <a href="@Url.Action("Index")" class="btn btn-warning">
+            Go Back
+        </a>
+        <br><br>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Id, new { @class = "text-success" })
+            @Html.DisplayFor(model => model.Id)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "text-success" })
+            @Html.DisplayFor(model => model.Name)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "text-success" })
+            @Html.DisplayFor(model => model.Email)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Birthday, new { @class = "text-success" })
+            @Html.DisplayFor(model => model.Birthday)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Gender, new { @class = "text-success" })
+            @Html.DisplayFor(model => model.Gender)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Roles, new { @class = "text-success" })
+            @string.Join(",", Model.Roles.Select(role => role.Name))
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, new { @class = "text-success" })
+            @Html.DisplayFor(model => model.Password)
+        </div>
+    </div>
+</div>

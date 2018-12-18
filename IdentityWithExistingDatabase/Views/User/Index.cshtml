@@ -1,0 +1,55 @@
+﻿@model IEnumerable<IdentityWithExistingDatabase.Models.ViewModels.User.IndexViewModel>
+@{
+    ViewBag.Title = "Users";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h1>Users</h1>
+        <br>
+        <a href="@Url.Action("Create")" class="btn btn-primary">
+            Create New User
+        </a>
+        <br><br>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="table-responsive">
+            @if (Model.Count() == 0) {
+                <p class="text-info">No users available :(</p>
+            } else {
+                <table class="table table-condensed table-striped" style="font-size:8pt;">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Roles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model) {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink(user.Id.ToString(), "Details", new { id = user.Id })
+                                </td>
+                                <td>@user.Name</td>
+                                <td>@user.Email</td>
+                                <td>@string.Join(",", user.Roles)</td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Roles</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            }
+        </div>
+    </div>
+</div>

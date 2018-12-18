@@ -1,0 +1,57 @@
+﻿@model IdentityWithExistingDatabase.Models.ViewModels.User.CreateUserViewModel
+@{
+    ViewBag.Title = "Create New User";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h1>Create New User</h1>
+        <br>
+        <a href="@Url.Action("Index")" class="btn btn-warning">
+            Go Back
+        </a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                @Html.ValidationSummary("", new { @class = "text-danger" }, "strong")
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name)
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email)
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Birthday)
+                @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Gender)
+                @Html.EnumDropDownListFor(model => model.Gender, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Role)
+                @Html.EnumDropDownListFor(model => model.Role, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password)
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+
+            <input type="submit" class="btn btn-primary" value="Register" />
+        }
+    </div>
+</div>

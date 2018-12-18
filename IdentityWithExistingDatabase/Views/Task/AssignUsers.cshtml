@@ -1,0 +1,36 @@
+﻿@using IdentityWithExistingDatabase.Models.ViewModels.Task
+@{
+    ViewBag.Title = "Assign Users to Task";
+    var assignUsers = ViewBag.AssignUsers as AssignUsersViewModel;
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h1>Assign Users to Task No. @assignUsers.TaskId</h1>
+        <br>
+        @Html.ActionLink("Go Back", "Details", new { id = assignUsers.TaskId }, new { @class = "btn btn-warning" })
+        <br><br>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <h3>Select the users whom this task will be assigned to.</h3>
+        <br>
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("TaskId", assignUsers.TaskId)
+
+            <div class="form-group">
+                @foreach (var user in assignUsers.AssignedUsers) {
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="Users" id="Users" value="@user.Id" />
+                            @user.Name - @user.Email
+                        </label>
+                    </div>
+                }
+            </div>
+            <input type="submit" value="Assign Users" class="btn btn-danger" />
+        }
+    </div>
+</div>

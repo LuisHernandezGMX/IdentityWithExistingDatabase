@@ -1,0 +1,61 @@
+﻿@model IdentityWithExistingDatabase.Models.ViewModels.Task.AssignedTasksViewModel
+@{
+    ViewBag.Title = "Assigned Tasks";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h1>Assigned Tasks</h1>
+        <br>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="table-responsive">
+            @if (Model.UsersByTask.Count == 0) {
+                <p class="text-info">No tasks available at the moment :(</p>
+            } else {
+                <table class="table table-condensed table-striped" style="font-size:8pt">
+                    <thead>
+                        <tr>
+                            <th>Task Id</th>
+                            <th>Description</th>
+                            <th>Assigned Users</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var entry in Model.UsersByTask) {
+                            <tr>
+                                <td>@entry.Key.Id</td>
+                                <td>@entry.Key.Description</td>
+                                <td>
+                                    @{
+                                        if (entry.Value.Count() == 0) {
+                                            <p class="text-info">No users assigned yet :v</p>
+                                        } else {
+                                            var users = entry
+                                            .Value
+                                            .Select(user => $"(Id: {user.Id} | Name: {user.Name}) | Email: {user.Email}");
+
+                                            foreach (var us in users) {
+                                                @us
+                                                <br>
+                                            }
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Task Id</th>
+                            <th>Description</th>
+                            <th>Assigned Users</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            }
+        </div>
+    </div>
+</div>

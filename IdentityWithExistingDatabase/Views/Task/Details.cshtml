@@ -1,0 +1,91 @@
+﻿@model IdentityWithExistingDatabase.Models.DAL.Entities.Task
+@{
+    ViewBag.Title = $"Details of Task {Model.Id}";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h1>Task No. @Model.Id</h1>
+        <br>
+        @Html.ActionLink("Go Back", "Index", null, new { @class = "btn btn-warning" })
+        <br><br>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "text-success" })
+            @Model.Description
+        </div>
+        <div class="form-group">
+            <div class="table-responsive">
+                @if (Model.Milestones.Count() == 0) {
+                    <p class="text-success">This task has no milestones assigned to it yet :(</p>
+                } else {
+                    <table class="table table-condensed table-striped">
+                        <thead class="text-success">
+                            <tr>
+                                <th>Milestone Id</th>
+                                <th>Description</th>
+                                <th>Finished?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var milestone in Model.Milestones) {
+                                <tr>
+                                    <td>@milestone.Id</td>
+                                    <td>@milestone.Description</td>
+                                    <td>@(milestone.Finished ? "Finished! :3" : "On its way! >:v")</td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot class="text-success">
+                            <tr>
+                                <th>Milestone Id</th>
+                                <th>Description</th>
+                                <th>Finished?</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                }
+
+                @Html.ActionLink("Add New Milestone", "CreateMilestone", new { taskId = Model.Id }, new { @class = "btn btn-success" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="table-responsive">
+                @if (Model.Users.Count() == 0) {
+                    <p class="text-danger">This task has no users assigned to it yet :(</p>
+                } else {
+                    <table class="table table-condensed table-striped">
+                        <thead class="text-danger">
+                            <tr>
+                                <th>User Id</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model.Users) {
+                                <tr>
+                                    <td>@user.Id</td>
+                                    <td>@user.Name</td>
+                                    <td>@user.Email</td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot class="text-danger">
+                            <tr>
+                                <th>User Id</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                }
+
+                @Html.ActionLink("Assign Users", "AssignUsers", new { taskId = Model.Id }, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+</div>

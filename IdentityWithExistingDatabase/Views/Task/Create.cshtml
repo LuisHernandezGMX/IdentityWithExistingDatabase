@@ -1,0 +1,29 @@
+﻿@model IdentityWithExistingDatabase.Models.DAL.Entities.Task
+@{
+    ViewBag.Title = "Create New Task";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h1>Create New Task</h1>
+        <br>
+        @Html.ActionLink("Go Back", "Index", null, new { @class = "btn btn-warning" })
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                @Html.ValidationSummary("", new { @class = "text-danger" }, "strong")
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description)
+                @Html.TextBoxFor(model => model.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+            <input type="submit" value="Create" class="btn btn-primary" />
+        }
+    </div>
+</div>
