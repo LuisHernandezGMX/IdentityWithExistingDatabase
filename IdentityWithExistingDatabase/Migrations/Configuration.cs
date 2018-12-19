@@ -1,12 +1,12 @@
 using System;
-using System.Data.Entity;
-using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using IdentityWithExistingDatabase.Models.DAL.Entities;
 
 namespace IdentityWithExistingDatabase.Migrations
 {
-    internal sealed class Configuration : DbMigrationsConfiguration<IdentityDBContext>
+    sealed class Configuration : DbMigrationsConfiguration<IdentityDBContext>
     {
         public Configuration()
         {
@@ -32,8 +32,8 @@ namespace IdentityWithExistingDatabase.Migrations
                     Birthday = new DateTime(1980, 1, 1),
                     Gender = UserGender.NonSpecified,
                     Password = "AIMeeWpVYA7yeKA6usT0TGaZA/gVcG42AhH6zm/SXQibRncJnafxzv7Qv2xtRa2s4A==", // = Admin1$
-                    UserName = "admin@example.com",
-                    Roles = new[] { context.Roles.FirstOrDefault(role => role.Id == 1) }
+                    UserName = "admin@example.com"
+
                 },
                 new User {
                     Id = 2,
@@ -42,8 +42,7 @@ namespace IdentityWithExistingDatabase.Migrations
                     Birthday = new DateTime(1980, 1, 1),
                     Gender = UserGender.Female,
                     Password = "ANdAE9H+bwtZatUw/U0axcQdL54vvfwjEYyOC/RvmGfEis1PnymmuBpvrIAzLEAIkQ==", // = Editor1$
-                    UserName = "editor@example.com",
-                    Roles = new[] { context.Roles.FirstOrDefault(role => role.Id == 2) }
+                    UserName = "editor@example.com"
                 },
                 new User {
                     Id = 3,
@@ -52,10 +51,29 @@ namespace IdentityWithExistingDatabase.Migrations
                     Birthday = new DateTime(1980, 1, 1),
                     Gender = UserGender.Male,
                     Password = "AIibEzmSdVnHV92crtSDBlS92hDyJG/yJEYa05ovC3bvJC0wl91tSp8chrYzDYQ8Sg==", // = Visitor1$
-                    UserName = "visitor@example.com",
-                    Roles = new[] { context.Roles.FirstOrDefault(role => role.Id == 3) }
+                    UserName = "visitor@example.com"
                 }
             });
+
+            context.SaveChanges();
+
+            context
+                .Users
+                .FirstOrDefault(user => user.Id == 1)
+                .Roles
+                .Add(context.Roles.FirstOrDefault(role => role.Id == 1));
+
+            context
+                .Users
+                .FirstOrDefault(user => user.Id == 2)
+                .Roles
+                .Add(context.Roles.FirstOrDefault(role => role.Id == 2));
+
+            context
+                .Users
+                .FirstOrDefault(user => user.Id == 3)
+                .Roles
+                .Add(context.Roles.FirstOrDefault(role => role.Id == 3));
 
             context.SaveChanges();
 

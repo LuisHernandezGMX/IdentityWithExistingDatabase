@@ -238,7 +238,6 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Main\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
@@ -249,6 +248,7 @@
     <Content Include="Views\Task\CreateMilestone.cshtml" />
     <Content Include="Views\Task\AssignUsers.cshtml" />
     <Content Include="Views\Task\AssignedTasks.cshtml" />
+    <Content Include="Views\Main\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
